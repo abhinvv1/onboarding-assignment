@@ -76,11 +76,11 @@ class Game
 
   def calculate_score
     counts = @dice.map(&:value).tally
-    puts counts
+    # puts counts
     score = 0
     scoring_dice = 0
 
-    [1, 6, 5, 4, 3, 2].each do |num|
+    [1, 2, 3, 4, 5, 6].each do |num|
       if counts[num] && counts[num] >= 3
         score += (num == 1 ? 1000 : num * 100)
         scoring_dice += 3
