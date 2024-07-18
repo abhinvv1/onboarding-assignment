@@ -5,21 +5,21 @@ require_relative 'player'
 
 class Game
   def initialize(num_players)
-    @players = num_players.times.map { |i| Player.new("Player #{i + 1}") }
-    @dice = Array.new(5) { Die.new }
+    @players = num_players.times.map { |i| Player.new("Player #{i + 1}") } # players is a num_players size array of Player object
+    @dice = Array.new(5) { Die.new }    # dice is 5 size array of Die objects
     @current_player = 0
-    @final_round = false
+    @final_round = false      # to determine whether it is a final round or not
     @turn_number = 1
   end
 
-  def play
+  def play      # main play loop which runs until we reach final round
     until @final_round
       play_turn
       check_final_round
       @turn_number += 1
     end
     play_final_round
-    announce_winner
+    display_winner
   end
 
   private
@@ -117,7 +117,7 @@ class Game
     end
   end
 
-  def announce_winner
+  def display_winner
     winner = @players.max_by(&:score)
     puts "The winner is #{winner.name} with a score of #{winner.score}!"
   end
