@@ -1,7 +1,14 @@
 # frozen_string_literal: true
 
 # score_calculator.rb
+# The ScoreCalculator class is responsible for calculating the score
+# for a given set of dice rolls in the Greed game.
+
 class ScoreCalculator
+  # Calculates the score and number of scoring dice for a given set of dice.
+  # @param dice [Array<Die>] The array of Die objects to calculate the score for.
+  # @return [Array<Integer>] An array containing the score and number of scoring dice.
+
   def self.calculate(dice)
     counts = dice.map(&:value).tally
     score = 0

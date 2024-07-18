@@ -4,6 +4,8 @@ require_relative 'die'
 require_relative 'player'
 require_relative 'score_calculator'
 
+# The Game class manages the overall flow of the Greed game.
+# It handles player turns, dice rolling, score calculation, and game progression.
 class Game
   def initialize(num_players)
     @players = num_players.times.map { |i| Player.new("Player #{i + 1}") } # players is a num_players size array of Player object
@@ -25,6 +27,7 @@ class Game
 
   private
 
+  # Starts and manages the main game loop until the final round is complete.
   def play_turn
     puts "Turn #{@turn_number}:"
     puts "--------"
@@ -67,6 +70,8 @@ class Game
   def roll_dice(num_dice)
     num_dice.times { |i| @dice[i].roll }
   end
+
+  # Unrolls (resets) the specified number of dice.
   def unroll_dice(num_dice)
     num_dice.times { |i| @dice[i].unroll }
   end
@@ -83,6 +88,7 @@ class Game
     @current_player = (@current_player + 1) % @players.size
   end
 
+  # Manages the final round of the game where each player gets one last turn.
   def play_final_round
     puts "Final round!"
     (@players.size - 1).times do
