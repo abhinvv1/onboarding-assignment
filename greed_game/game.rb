@@ -2,6 +2,7 @@
 
 require_relative 'die'
 require_relative 'player'
+require_relative 'score_calculator'
 
 class Game
   def initialize(num_players)
@@ -34,7 +35,7 @@ class Game
     loop do
       roll_dice(remaining_dice)
       display_roll(remaining_dice)
-      turn_score, scoring_dice = calculate_score
+      turn_score, scoring_dice = ScoreCalculator.calculate(@dice.take(remaining_dice))
       if turn_score == 0
         puts "Score in this round: 0"
         puts "Total score: #{current_player.score}"
@@ -72,33 +73,6 @@ class Game
 
   def display_roll(num_dice)
     puts "#{@players[@current_player].name} rolls: #{@dice.take(num_dice).map(&:value).join(', ')}"
-  end
-
-  def calculate_score
-    counts = @dice.map(&:value).tally
-    # puts counts
-    score = 0
-    scoring_dice = 0
-
-    [1, 2, 3, 4, 5, 6].each do |num|
-      if counts[num] && counts[num] >= 3
-        score += (num == 1 ? 1000 : num * 100)
-        scoring_dice += 3
-        counts[num] -= 3
-      end
-    end
-
-    # Check for individual 1s and 5s
-    if counts[1]
-      score += counts[1] * 100
-      scoring_dice += counts[1]
-    end
-    if counts[5]
-      score += counts[5] * 50
-      scoring_dice += counts[5]
-    end
-    unroll_dice 5
-    [score, scoring_dice]
   end
 
   def check_final_round
