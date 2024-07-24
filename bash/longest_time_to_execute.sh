@@ -1,3 +1,5 @@
+#!/bin/bash
+
 awk '
     /Started/ {request=$0; next}
     /Completed/ {
@@ -16,4 +18,3 @@ awk '
         print maxRequest "\n" maxResponse
     }
 ' "$1"
-
