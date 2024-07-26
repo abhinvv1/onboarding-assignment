@@ -12,11 +12,28 @@ class Die
 
   # Rolls the die and sets its value to a random number between 1 and 6.
   def roll
-    @value = rand(1..6)
+    begin @value = rand(1..6)
+      validate_value
+      @value
+    rescue StandardError => e
+      puts "Error rolling die: #{e.message}"
+      @value = nil
+    end
   end
 
-  # Resets the die's value to nil, representing an unrolled state.
   def unroll
     @value = nil
+  end
+
+  def rolled?
+    !@value.nil?
+  end
+
+  private
+
+  def validate_value
+    unless @value.is_a?(Integer) && @value.between?(1, 6)
+      raise StandardError, "Invalid die value: #{@value}"
+    end
   end
 end

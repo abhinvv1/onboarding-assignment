@@ -3,13 +3,17 @@
 require_relative 'die'
 require_relative 'player'
 require_relative 'score_calculator'
+require_relative 'constants'
 
 # The Game class manages the overall flow of the Greed game.
 # It handles player turns, dice rolling, score calculation, and game progression.
 class Game
+  include Constants
+
   def initialize(num_players)
+    validate_num_players(num_players)
     @players = num_players.times.map { |i| Player.new("Player #{i + 1}") } # players is a num_players size array of Player object
-    @dice = Array.new(5) { Die.new }    # dice is 5 size array of Die objects
+    @dice = Array.new(NUM_DICE) { Die.new }    # dice is 5 size array of Die objects
     @current_player = 0
     @final_round = false      # to determine whether it is a final round or not
     @turn_number = 1
@@ -26,6 +30,11 @@ class Game
   end
 
   private
+  def validate_num_players(num_players)
+    unless num_players.is_a?(Integer) && num_players > 1
+      raise ArgumentError, "Number of players must be an integer greater than 1"
+    end
+  end
 
   # Starts and manages the main game loop until the final round is complete.
   def play_turn
@@ -33,34 +42,34 @@ class Game
     puts "--------"
     current_player = @players[@current_player]
     round_score = 0
-    remaining_dice = 5
+    remaining_dice = NUM_DICE
 
     loop do
       roll_dice(remaining_dice)
       display_roll(remaining_dice)
       turn_score, scoring_dice = ScoreCalculator.calculate(@dice.take(remaining_dice))
       if turn_score == 0
-        puts "Score in this round: 0"
-        puts "Total score: #{current_player.score}"
+        puts "#{ROUND_SCORE} 0"
+        puts "#{TOTAL_SCORE} #{current_player.score}"
         @current_player = (@current_player + 1) % @players.size
         return
       end
 
       round_score += turn_score
-      puts "Score in this round: #{round_score}"
-      puts "Total score: #{current_player.score + (current_player.in_game ? round_score : 0)}"
+      puts "#{ROUND_SCORE} #{round_score}"
+      puts "#{TOTAL_SCORE} #{current_player.score + (current_player.in_game ? round_score : 0)}"
 
       remaining_dice -= scoring_dice
-      remaining_dice = 5 if remaining_dice <= 0  # If all dice scored, reset to 5
+      remaining_dice = NUM_DICE if remaining_dice <= 0  # If all dice scored, reset to 5
 
-      if remaining_dice < 5
-        print "Do you want to roll the remaining #{remaining_dice} dice? (y/n): "
+      if remaining_dice < NUM_DICE
+        print format(ROLL_REMAINING_PROMPT, remaining_dice)
       else
-        print "Do you want to roll all 5 dice again? (y/n): "
+        print ROLL_ALL_PROMPT
       end
 
-      if gets.chomp.downcase != 'y'
-        current_player.add_score(round_score) if current_player.in_game || round_score >= 300
+      if gets.chomp.downcase != YES_INPUT
+        current_player.add_score(round_score) if current_player.in_game || round_score >= MINIMUM_SCORE_TO_ENTER
         @current_player = (@current_player + 1) % @players.size
         break
       end
@@ -81,7 +90,7 @@ class Game
   end
 
   def check_final_round
-    @final_round = true if @players[@current_player].score >= 3000
+    @final_round = true if @players[@current_player].score >= WINNING_SCORE
   end
 
   def next_player
@@ -90,7 +99,7 @@ class Game
 
   # Manages the final round of the game where each player gets one last turn.
   def play_final_round
-    puts "Final round!"
+    puts FINAL_ROUND
     (@players.size - 1).times do
       play_turn
       next_player
