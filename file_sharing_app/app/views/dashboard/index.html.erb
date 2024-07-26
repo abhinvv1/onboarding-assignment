@@ -1,0 +1,20 @@
+<h1>Welcome, <%= current_user.username %>!</h1>
+
+<h2>Your Recent Files</h2>
+<% if @recent_files and @recent_files.any? %>
+  <ul class="file-list">
+    <% @recent_files.each do |file| %>
+      <li class="file-item">
+        <span class="file-name"><%= file.name %>
+          <span class="file-date">(Uploaded on: <%= file.upload_date.strftime("%d %B %Y") %>)</span>
+        </span>
+
+        <%= link_to "Download", download_user_file_path(file), class: 'download-link' %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="no-files-message">You haven't uploaded any files yet.</p>
+<% end %>
+
+<%= link_to "Manage All Files", user_files_path, class: 'manage-files-link' %>
