@@ -19,23 +19,21 @@
       <td><%= file.created_at.strftime("%d %B %Y") %></td>
       <td><%= number_to_human_size(file.size) %></td>
       <td>
-          <%= link_to "Download", download_user_file_path(file) %>
-          <% unless file.public? %>
-          | <%= button_to "Delete", user_file_path(file), method: :delete %>
-        <% end %>
-        </td>
-        <td>
-          <%=  form_with(url: toggle_public_user_file_path(file), method: :post, local: true) do |form|  %>
-          <label class="switch">
-            <%=  form.check_box :public, checked: file.public?, onchange: 'this.form.submit()'  %>
-            <span class="slider round"></span>
-          </label>
-          <%  if file.public?  %>
-          <%=  link_to "Link", public_file_path(file.public_url), target: "_blank"  %>
-          <%  end  %>
-          <%  end  %>
-        </td>
-        </tr>
-        <%  end %>
+          <%= link_to "Download", download_user_file_path(file)%>
+          <%= button_to "Delete", user_file_path(file), method: :delete, class: 'delete-btn'%>
+      </td>
+      <td>
+        <%=  form_with(url: toggle_public_user_file_path(file), method: :post, local: true) do |form|  %>
+        <label class="switch">
+          <%=  form.check_box :public, checked: file.public?, onchange: 'this.form.submit()'  %>
+          <span class="slider round"></span>
+        </label>
+        <%  if file.public?  %>
+        <%=  link_to "Link", public_file_path(file.public_url), target: "_blank"  %>
+        <%  end  %>
+        <%  end  %>
+      </td>
+    </tr>
+  <%  end %>
   </tbody>
 </table>

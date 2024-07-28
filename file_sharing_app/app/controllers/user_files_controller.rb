@@ -17,6 +17,7 @@ class UserFilesController < ApplicationController
   def create
     @user_file = current_user.user_files.new(user_file_params)
     @user_file.name = params[:user_file][:name]
+    # if name is not present then set original name as default filename
     if @user_file.name.blank?
       @user_file.name = params[:user_file][:file_data].original_filename
     end
@@ -32,12 +33,8 @@ class UserFilesController < ApplicationController
   end
 
   def destroy
-    if @user_file.public?
-      redirect_to user_files_path, alert: 'Public files cannot be deleted.'
-    else
-      @user_file.destroy
-      redirect_to user_files_path, notice: 'File was successfully deleted.'
-    end
+    @user_file.destroy
+    redirect_to user_files_path, notice: 'File was successfully deleted.'
   end
 
   def download

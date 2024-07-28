@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :user_files, dependent: :destroy
 
   validates :username, presence: true, uniqueness: true
+  validates :name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, on: :create, length: { minimum: 8 }
   validate :password_complexity

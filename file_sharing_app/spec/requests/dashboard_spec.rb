@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Dashboards", type: :request do
   describe "GET #index" do
     context "when user is logged in" do
-      let(:user) { User.create(username: "testuser", email: "testuser@email.com", password: "Password@123") }
+      let(:user) { create(:user) }
 
       before do
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
@@ -19,7 +19,7 @@ RSpec.describe "Dashboards", type: :request do
     context "when user is not logged in" do
       before do
         allow(controller).to receive(:require_login).and_call_original
-        get '/dashboard'
+        get dashboard_path
       end
 
       it "redirects to the login page" do

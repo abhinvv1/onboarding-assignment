@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "UserFiles", type: :request do
-  let(:user) { User.create(username: "testuser", email: "testuser@email.com", password: "Password@123") }
+  let(:user) { create(:user) }
   let(:file_data) { double('file_data', original_filename: 'test.txt', size: 1024, content_type: 'text/plain') }
 
   describe "test callbacks" do

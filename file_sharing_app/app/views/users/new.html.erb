@@ -9,6 +9,11 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :name, class: 'form-label' %>
+    <%= f.text_field :name, class: 'form-input' %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :email, class: 'form-label' %>
     <%= f.email_field :email, class: 'form-input' %>
   </div>
@@ -19,4 +24,9 @@
   </div>
 
   <%= f.submit "Sign Up", class: 'form-submit' %>
+
 <% end %>
+<div class="log-in">
+  <p>Have an account? <a href="<%= login_path %>">Click here</a></p>
+</div>
+

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UserFile, type: :model do
-  let(:user) { User.create(username: 'testuser', email: 'test@example.com', password: 'Password@123') }
+  let(:user) { create(:user) }
   let(:file_data) { double('file_data', original_filename: 'test.txt', size: 1024, content_type: 'text/plain') }
 
   describe 'validations' do
@@ -26,6 +26,14 @@ RSpec.describe UserFile, type: :model do
       duplicate_file = UserFile.new(user: user, name: 'test.txt', file_data: file_data)
       expect(duplicate_file).to_not be_valid
       expect(duplicate_file.errors[:name]).to include('File already present')
+    end
+
+    it 'is valid with the same name for different users' do
+      user1 = create(:user)
+      user2 = create(:user)
+      UserFile.create(user: user1, name: 'test.txt', file_data: file_data)
+      duplicate_file = UserFile.create(user: user2, name: 'test.txt', file_data: file_data)
+      expect(duplicate_file).to be_valid
     end
   end
 end

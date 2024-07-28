@@ -1,4 +1,4 @@
-<h1>Shared File from <%= @user_file.user.username %> </h1>
+<h1>Shared File from <%= (@user_file.user.name) ? @user_file.user.name : "" %> (<%= @user_file.user.username %>) </h1>
 
 <table class="file-table">
   <thead>
