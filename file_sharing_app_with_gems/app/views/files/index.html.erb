@@ -1,0 +1,21 @@
+<h1>All Your Files</h1>
+
+<%= link_to 'Upload New File', new_file_path, class: 'btn btn-primary upload-files-link' %>
+
+<div class="file-grid">
+  <% @user_files.each do |user_file| %>
+    <div class="file-tile">
+      <p class="file-name"> <%= user_file.name %> </p>
+        <p>Uploaded on: <%= user_file.created_at.strftime("%d %B %Y") %></p>
+      <p>Size: <%= number_to_human_size(user_file.file.size) %></p>
+      <%= link_to 'Download', download_file_path(user_file), class: 'btn btn-sm btn-secondary download-link' %>
+      <%= button_to user_file.public? ? 'Make Private' : 'Make Public', toggle_public_file_path(user_file), method: :post, class: "btn btn-sm toggle-button #{user_file.public? ? 'btn-warning' : 'btn-info'}" %>
+      <% if user_file.public? %>
+        <p>Public URL: <%= link_to public_file_url(user_file), public_file_path(user_file) %></p>
+      <% end %>
+      <%= button_to 'Delete', file_path(user_file), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger delete-button' %>
+    </div>
+  <% end %>
+</div>
+
+<%= paginate @user_files %>

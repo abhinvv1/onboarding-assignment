@@ -88,6 +88,7 @@ yarn-debug.log*
 # Ignore Byebug command history file.
 .byebug_history
 
+/public/uploads/*
 ## Specific to RubyMotion:
 .dat*
 .repl_history
@@ -126,4 +127,6 @@ build-iPhoneSimulator/
 
 # Used by RuboCop. Remote config files pulled in from inherit_from directive.
 # .rubocop-https?--*
-/.idea
+/.idea/*
+/.keep
+

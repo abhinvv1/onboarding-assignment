@@ -1,0 +1,291 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+body {
+    font-family: Ubuntu, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+header nav {
+    display: flex;
+    gap: 20px;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    padding: 5px 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+header nav a:hover {
+    background-color: #e0e0e0;
+}
+
+h2 {
+    font-size: 24px;
+    color: #343a40;
+    margin-bottom: 15px;
+}
+
+.file-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.file-item {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.file-name {
+    font-weight: bold;
+}
+
+.file-date {
+    color: #6c757d;
+    margin-left: 10px;
+}
+
+.download-link {
+    font-size: small;
+    text-decoration: none;
+    color: #28a745;
+    border: 1px solid #28a745;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.download-link:hover {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.no-files-message {
+    font-style: italic;
+    color: #6c757d;
+}
+
+.upload-files-container,
+.manage-files-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.upload-files-link,
+.manage-files-link {
+    font-size: small;
+    display: inline-block;
+    background-color: #ffffff;
+    width: fit-content;
+    color: #007bff;
+    text-decoration: none;
+    border: 1px solid #007bff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.upload-files-link:hover,
+.manage-files-link:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.delete-button {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 5px 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: small;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #f5c6cb;
+    color: #721c24;
+}
+
+.toggle-button {
+    background-color: #ffffff;
+    color: #2cbdc1;
+    border: 1px solid #2885a7;
+    padding: 5px 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: small;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+    background-color: #2898a7;
+    color: #fff;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: block;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 45px;
+    margin-top: 20px;
+}
+
+.file-tile {
+    width: max-content;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.edit-profile-form,
+.signup-form,
+.upload-form,
+.login-form {
+    width: 400px;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.field {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 16px;
+    color: #555;
+}
+
+.form-input {
+    width: calc(100% - 20px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.form-check {
+    margin-right: 5px;
+}
+.form-check-label {
+    font-size: 14px;
+    color: #555;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.actions {
+    text-align: center;
+}
+
+.form-submit {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.form-submit:hover {
+    background-color: #0056b3;
+}
+
+.sign-up a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.sign-up a:hover {
+    text-decoration: underline;
+}
+
+.sign-up-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #007bff;
+    background-color: white;
+    color: #007bff;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.sign-up-btn:hover {
+    background-color: #007bff;
+    color: white;
+}
