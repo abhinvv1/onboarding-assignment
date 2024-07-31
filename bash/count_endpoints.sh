@@ -1,9 +1,9 @@
 #!/bin/bash
 
 awk -F: '$3 ~ /Started/ {
-  split($3, a, " ");
-  sub(/\?.*/, "", a[3]);
-  print a[2], a[3]
+  split($3, request, " ");
+  sub(/\?.*/, "", request[3]);
+  print request[2], request[3]
 }' "$1" | \
 sort | \
 uniq -c | \
