@@ -77,5 +77,3 @@ class UserFilesController < ApplicationController
               disposition: 'attachment'
     end
 end
-
-
