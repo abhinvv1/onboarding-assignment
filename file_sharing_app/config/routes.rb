@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  get 'user_files/index'
-  get 'user_files/create'
-  get 'user_files/destroy'
-  get 'user_files/download'
-  get 'user_files/toggle_public'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   root 'dashboard#index'
