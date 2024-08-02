@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>FileSharingAppWithGems</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>File Sharing App</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+<header>
+  <h1>Rapid Share with Gems</h1>
+  <nav>
+      <% if user_signed_in? %>
+        <%= link_to "Dashboard", root_path %>
+        <%= link_to current_user.name, profiles_show_path %>
+        <%= link_to "Logout", destroy_user_session_path %>
+      <% else %>
+        <%= link_to "Sign Up", new_user_registration_path %>
+        <%= link_to "Login", new_user_session_path %>
+      <% end %>
+    </nav>
+</header>
+
+<% flash.each do |type, message| %>
+    <div class="alert alert-<%= type == 'notice' ? 'success' : 'danger' %>">
+      <%= message %>
+    </div>
+  <% end %>
+
+<%= yield %>
+</body>
 </html>

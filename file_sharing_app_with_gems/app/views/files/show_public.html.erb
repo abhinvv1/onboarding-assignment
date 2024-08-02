@@ -1,0 +1,9 @@
+<h1>Shared File from (<%= @user_file.user.name %>) <%= @user_file.name %> </h1>
+
+<div class="file-details">
+  <p><strong>Uploaded on:</strong> <%= @user_file.created_at.strftime("%d %b %Y") %></p>
+  <p><strong>File size:</strong> <%= number_to_human_size(@user_file.file.size) %></p>
+  <p><strong>File type:</strong> <%= @user_file.file.content_type %></p>
+</div>
+
+<%= link_to 'Download File', download_file_path(@user_file), class: 'btn btn-primary download-link' %>
