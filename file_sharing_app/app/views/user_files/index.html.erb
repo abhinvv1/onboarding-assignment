@@ -1,0 +1,39 @@
+<h1>File Dashboard - <%= pluralize(@user_files.count, 'file') %></h1>
+
+<%= link_to "Upload Files", upload_user_files_path, class: "upload-button" %>
+
+<table class="file-table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Upload Date</th>
+    <th>Size</th>
+    <th>Actions</th>
+    <th>Sharing</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @user_files.each do |file| %>
+    <tr>
+      <td><%= file.name %></td>
+      <td><%= file.created_at.strftime("%d %B %Y") %></td>
+      <td><%= number_to_human_size(file.size) %></td>
+      <td>
+          <%= link_to "Download", download_user_file_path(file)%>
+          <%= button_to "Delete", user_file_path(file), method: :delete, class: 'delete-btn'%>
+      </td>
+      <td>
+        <%=  form_with(url: toggle_public_user_file_path(file), method: :post, local: true) do |form|  %>
+        <label class="switch">
+          <%=  form.check_box :public, checked: file.public?, onchange: 'this.form.submit()'  %>
+          <span class="slider round"></span>
+        </label>
+        <%  if file.public?  %>
+        <%=  link_to "Link", public_file_path(file.public_url), target: "_blank"  %>
+        <%  end  %>
+        <%  end  %>
+      </td>
+    </tr>
+  <%  end %>
+  </tbody>
+</table>

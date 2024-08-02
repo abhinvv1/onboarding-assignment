@@ -1,0 +1,26 @@
+<h1>Upload New File</h1>
+
+<%= form_with(model: @user_file, local: true, multipart: true) do |form| %>
+  <% if @user_file.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_file.errors.count, "error") %> prohibited this file from being saved:</h2>
+      <ul>
+        <% @user_file.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :file_data %>
+    <%= form.file_field :file_data %>
+  </div>
+
+  <%= form.submit "Upload File" %>
+<% end %>

@@ -1,0 +1,24 @@
+<h1>User Profile - <%= @user.username %> </h1>
+
+<%= form_with(model: @user, local: true, html: { class: 'edit-profile-form' }) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <div class="form-group">
+    <%= f.label :username, class: 'form-label' %>
+    <%= f.text_field :username, class: 'form-input' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name, class: 'form-label' %>
+    <%= f.text_field :name, class: 'form-input' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email, class: 'form-label' %>
+    <%= f.email_field :email, class: 'form-input' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Update Profile", class: 'form-submit' %>
+  </div>
+<% end %>
