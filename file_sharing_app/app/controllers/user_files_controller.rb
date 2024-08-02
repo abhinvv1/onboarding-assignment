@@ -57,7 +57,14 @@ class UserFilesController < ApplicationController
   end
 
   def show_public
-    @user_file = UserFile.find_by!(public_url: params[:public_url], public: true)
+    @user_file = UserFile.find_by(public_url: params[:public_url], public: true)
+
+    if @user_file
+      render :show_public
+    else
+      flash[:alert] = "The requested file is not available or no longer public."
+      redirect_to root_path
+    end
   end
 
   private
